@@ -1,4 +1,4 @@
-FROM node:24-bookworm-slim@sha256:2fe369e969550cde8e867afc3fe370b260140cab4a23d467074295b42163d553 AS frontend
+FROM node:26-bookworm-slim@sha256:cd9f682fa2885cd1056e830424764158570061c59736a1da836bc3d73df095ae AS frontend
 WORKDIR /src
 COPY package*.json ./
 RUN npm ci
@@ -18,7 +18,7 @@ WORKDIR /src
 COPY workers/rust/ ./
 RUN cargo test && cargo build --release
 
-FROM node:24-bookworm-slim@sha256:2fe369e969550cde8e867afc3fe370b260140cab4a23d467074295b42163d553 AS runtime
+FROM node:26-bookworm-slim@sha256:cd9f682fa2885cd1056e830424764158570061c59736a1da836bc3d73df095ae AS runtime
 RUN apt-get update && apt-get install -y --no-install-recommends python3 openjdk-17-jdk-headless ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
