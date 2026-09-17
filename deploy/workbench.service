@@ -1,0 +1,19 @@
+[Unit]
+Description=Polyglot Evaluation Workbench
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/workbench.conf
+ExecStart=/usr/local/lib/workbench/start.sh
+ExecStop=/usr/bin/docker stop --time 30 polyglot-workbench-aws
+Restart=on-failure
+RestartSec=10
+TimeoutStartSec=300
+TimeoutStopSec=45
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

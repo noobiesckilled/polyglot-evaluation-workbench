@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.build/
+.data/
+__pycache__/
+*.pyc
+.env
+coverage/
+playwright-report/
+test-results/
+workers/rust/target/

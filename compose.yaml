@@ -1,0 +1,23 @@
+services:
+  workbench:
+    build: .
+    ports:
+      - "127.0.0.1:4173:4173"
+    environment:
+      WORKBENCH_TOKEN: ${WORKBENCH_TOKEN:?Set a random WORKBENCH_TOKEN of at least 24 characters}
+      READ_ONLY_TOKEN: ${READ_ONLY_TOKEN:-}
+    volumes:
+      - workbench-data:/app/.data
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 128
+    mem_limit: 768m
+    cpus: 1.0
+    restart: unless-stopped
+volumes:
+  workbench-data:

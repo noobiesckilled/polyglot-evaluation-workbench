@@ -1,0 +1,10 @@
+[Unit]
+Description=Back up the workbench database to S3
+After=workbench.service
+Requires=workbench.service
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/workbench.conf
+ExecStart=/usr/local/lib/workbench/backup.sh
+UMask=0077
