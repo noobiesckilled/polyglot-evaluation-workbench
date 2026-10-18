@@ -13,7 +13,7 @@ WORKDIR /src
 COPY workers/go/ ./
 RUN gofmt -w . && go test ./... && CGO_ENABLED=0 go build -trimpath -o /go-worker .
 
-FROM rust:1.91-bookworm@sha256:c1e5f19e773b7878c3f7a805dd00a495e747acbdc76fb2337a4ebf0418896b33 AS rust-worker
+FROM rust:1.98-bookworm@sha256:9a73a5088750b4c95158ab26629c854c3d6fc4b173cb7bc8079ad252d8ed7bfa AS rust-worker
 WORKDIR /src
 COPY workers/rust/ ./
 RUN cargo test && cargo build --release
